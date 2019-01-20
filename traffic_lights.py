@@ -56,27 +56,52 @@ class TrafficLights(turtle.Turtle):
         self.shape("circle")
         self.color("#A9A9A9")
         self.shapesize(1.5)
+        self.red = '#cc0605'
+        self.amber = '#fad201'
+        self.green = '#33a532'
 
     def red_light(self, switch):
         self.penup()
         self.setposition(0, 100)
         self.color("#A9A9A9")
         if switch:
-            self.color('#cc0605')
+            self.color(self.red)
 
     def amber_light(self, switch):
         self.penup()
         self.setposition(0, 60)
         self.color("#A9A9A9")
         if switch:
-            self.color('#fad201')
+            self.color(self.amber)
 
     def green_light(self, switch):
         self.penup()
         self.setposition(0, 20)
         self.color("#A9A9A9")
         if switch:
-            self.color('#33a532')
+            self.color(self.green)
+
+
+# functions
+def stop():
+    traffic_light_red.red_light(True)
+    traffic_light_amber.amber_light(False)
+    traffic_light_green.green_light(False)
+
+
+def ready_to_go():
+    traffic_light_red.red_light(False)
+    traffic_light_amber.amber_light(True)
+    traffic_light_green.green_light(True)
+
+
+def go():
+    traffic_light_amber.amber_light(False)
+
+
+def ready_to_stop():
+    traffic_light_amber.amber_light(True)
+    traffic_light_green.green_light(False)
 
 
 # class instances
@@ -93,19 +118,12 @@ traffic_light_background.draw_background()
 
 # main loop
 while True:
-    # traffic light colours
-    traffic_light_red.red_light(True)
-    traffic_light_amber.amber_light(False)
-    traffic_light_green.green_light(False)
+    # traffic light colours patterns
+    stop()
     time.sleep(3)
-    traffic_light_red.red_light(False)
-    traffic_light_amber.amber_light(True)
-    traffic_light_green.green_light(True)
+    ready_to_go()
     time.sleep(1)
-    traffic_light_amber.amber_light(False)
+    go()
     time.sleep(3)
-    traffic_light_amber.amber_light(True)
-    traffic_light_green.green_light(False)
+    ready_to_stop()
     time.sleep(1)
-
-
