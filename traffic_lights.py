@@ -17,11 +17,13 @@ class TrafficLightBox(turtle.Turtle):
         self.hideturtle()
         self.speed(0)
         self.color('#000')
+        self.x = -100
+        self.y = 60
         self.width(3)
         self.pensize(5)
 
     def draw_box(self):
-        self.setposition(-30, 120)
+        self.setposition(self.x-30, self.y*2)
         self.pendown()
         self.fd(60)
         self.rt(90)
@@ -33,7 +35,7 @@ class TrafficLightBox(turtle.Turtle):
         self.penup()
 
     def draw_stand(self):
-        self.setposition(0, 0)
+        self.setposition(self.x, 0)
         self.pendown()
         self.pensize(5)
         self.fd(-60)
@@ -43,7 +45,7 @@ class TrafficLightBox(turtle.Turtle):
 
     def draw_background(self):
         self.showturtle()
-        self.setposition(0, 60)
+        self.setposition(self.x, self.y)
         self.shape("square")
         self.shapesize(6, 3)
         self.color("#000")
@@ -56,27 +58,30 @@ class TrafficLights(turtle.Turtle):
         self.shape("circle")
         self.color("#A9A9A9")
         self.shapesize(1.5)
+        self.x = -100
+        self.y = 60
+        self.gap = 40
         self.red = '#cc0605'
         self.amber = '#fad201'
         self.green = '#33a532'
 
     def red_light(self, switch):
         self.penup()
-        self.setposition(0, 100)
+        self.setposition(self.x, self.y+self.gap)
         self.color("#A9A9A9")
         if switch:
             self.color(self.red)
 
     def amber_light(self, switch):
         self.penup()
-        self.setposition(0, 60)
+        self.setposition(self.x, self.y)
         self.color("#A9A9A9")
         if switch:
             self.color(self.amber)
 
     def green_light(self, switch):
         self.penup()
-        self.setposition(0, 20)
+        self.setposition(self.x, self.y-self.gap)
         self.color("#A9A9A9")
         if switch:
             self.color(self.green)
@@ -122,8 +127,8 @@ while True:
     stop()
     time.sleep(3)
     ready_to_go()
-    time.sleep(1)
+    time.sleep(2)
     go()
     time.sleep(3)
     ready_to_stop()
-    time.sleep(1)
+    time.sleep(2)
